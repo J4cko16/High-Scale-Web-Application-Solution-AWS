@@ -38,6 +38,9 @@ I created a load test in order to test how my highly scalable web application ad
 Once everything was done I documented all of my steps that I have done and took pictures of important parts of the project. Then researched how to add them to this file.
 
 # Lucid Chart Plan (Beginning vs End):
-Beginning:
+ # Beginning:
 ![step 6 1](https://github.com/J4cko16/High-Scale-Web-Application-Solution-AWS/assets/102924228/87d550a8-1f5b-4a35-869e-24e690c1b26e)
-
+<br> I had no clue what I was doing at the beginning of this project. If it doesn't make sense to you that is because I had no clue what I was doing at first. I have come a long way since starting this project.
+# End:
+<img width="949" alt="Screen Shot 2023-06-05 at 9 21 39 PM" src="https://github.com/J4cko16/High-Scale-Web-Application-Solution-AWS/assets/102924228/3f7c0f4a-da2c-4504-b7de-9a71998faca8">
+<br> First of all the user types in the public IPv4 in the search bar. Once the IPv4 is typed it will direct to the security groups inbound rule and call the HTTP any IPv4 protocol. Once the protocol is called the user has access to the IPv4 domain of the EC2 and logs on the the web application being hosted by the EC2's bash script. Meanwhile while the EC2 instance is active the load balencing is always checking the load of the server and is constantly changing the traffic of the server to mutliple availability zones in order to balence the traffics load to make the website as latency free as possible. Then the auto scaling group is responding to the inbalence in load and scanning it using a health check every 300 seconds. Once the health check has been completed it gives the auto scaling a signal of the load that is currently needed and adjusts or adds the instances accordingly by terminating uneeded instances or adding new ones to help with the sudden traffic. While all of this is happening the VPC is the base of it all. The VPC is pretty much just the virutal cloud enviroment and the EC2 services are all linking to it in order to host the web application. With this solution the user should be able to enoy a nice auto scaling web application without any or much latency.
