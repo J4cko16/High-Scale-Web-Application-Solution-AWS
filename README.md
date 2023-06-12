@@ -8,6 +8,9 @@ You are a cloud engineer. Your manager has asked you to create a proof of concep
 
 Your challenge is to plan, design, build, and deploy the web application to the AWS Cloud in a way that is consistent with best practices of the AWS Well-Architected Framework. During the peak admissions period, the application must support thousands of users, and be highly available, scalable, load balanced, secure, and high performing.
 
+# Step 0 (Estamate Cost):
+![load cost](https://github.com/J4cko16/High-Scale-Web-Application-Solution-AWS/assets/102924228/e4c1b4b1-0a73-4253-b23c-ae9ad16e236a)
+
 # Step 1 (Creating a Virtual Machine):
 A basic VPC and security group were already created when I booted my AWS service. So I needed a virutal machine to host the web application. Using AmazonEC2 I assigned a public IPv4 address to the Virtual Machine. The AMI I used was the latest free Ubuntu2023 AMI that they allowed since Ubuntu is a powerful version of Linux that could handle lots of data at once in order to hold all of the data required for the student regestration and since Linux is able to run bash which is a form of scripiting that I will be using. Then I selected the basic security group given to me for the time being and also selected my premade VPC since it met the requirements of what I wanted to use it for. There is a website I wanted to link to the EC2 so I used a bash script given to me for the senario since it works with Linux computers. The EC2 was made but you can't go onto the web application since there is no path so I created an inbound rule in the security group using a "Any IPv4" route and with a TCP protocol. Using TCP allows for slower but better web traffic control and the Any IPv4 allows for my EC2's Ipv4 to work as the website link allowing me to load the web application as shown in the image below.
 
@@ -23,7 +26,7 @@ Load Balencers scale your load capacity automatically in response to changes in 
 ![step 2 2](https://github.com/J4cko16/High-Scale-Web-Application-Solution-AWS/assets/102924228/27286c5a-a8cf-4dd0-9030-152c2a10e6df)
 
 # Step 3 (Creating an Auto Scaling Group): 
-Using Amazon EC2 I created an auto scaling group. The auto scaling group creates or removes instances based on how strong the load is on your webservers CPU. My auto scaling group goes based on a unit scale and I have the minimum strength at 1 unit and the max at 300. My desired capacity is 4 units. With my desired capacity at 4 units it allows for a semi-strong web application at all times and can change based on the load to up to 300 units. I have no minimum or maximum on my instance type requirements allowing for any of my instances to be scaled very high. I have a health check that checks for EC2 and ELB with a grace period of 300 making sure the only instances that are working are running and terminating any instances that are unused or not working.
+Using Amazon EC2 I created an auto scaling group. The auto scaling group creates or removes instances based on how strong the load is on your webservers CPU. My auto scaling group goes based on a unit scale and I have the minimum strength at 1 unit and the max at 300. My desired capacity is 4 units. With my desired capacity at 4 units it allows for a semi-strong web application at all times and can change based on the load to up to 300 units. I have no minimum or maximum on my instance type requirements allowing for any of my instances to be scaled very high. I have a health check that checks for EC2 and ELB with a grace period of 300 making sure the only instances that are working are running and terminating any instances that are unused or not working. For the "Lab Instances" I made, I created t1.micros since they're the cheapest of the instance types. Due to the max unit strenth being at 300, 50 or so t1 instances will be created allowing for much more than 5,000 users and for scaling to balence the CPU load between 50 instances instead of just the 1. 
 
 ![step 3 1](https://github.com/J4cko16/High-Scale-Web-Application-Solution-AWS/assets/102924228/aeebf252-c686-48d5-bee2-bf3579604fd5)
 
@@ -34,8 +37,14 @@ I created a load test in order to test how my highly scalable web application ad
 
 ![step 4 2](https://github.com/J4cko16/High-Scale-Web-Application-Solution-AWS/assets/102924228/0e34bc03-5567-4853-ac05-b9cc30db052a)
 
+![cost brr](https://github.com/J4cko16/High-Scale-Web-Application-Solution-AWS/assets/102924228/777744a7-6532-4d8c-959a-e01a8ea297f2)
+<br> The CPU had a stronger load when the test started but when the health check triggered it lowered to around 3% due to the balencing and scaling.
 # Step 5 (Finishing Up):
 Once everything was done I documented all of my steps that I have done and took pictures of important parts of the project. Then researched how to add them to this file.
+
+# Finishing Cost
+![cost brr](https://github.com/J4cko16/High-Scale-Web-Application-Solution-AWS/assets/102924228/ea1018ea-851e-4bae-81ee-1169653b7e4e)
+<br>I had the instance run for about a month and the cost is half of what the pricing calculator predicted. I ended up not using Cloud Front and just using the free default VPC eliminating around $38 dollars from the orginal cost.
 
 # Lucid Chart Plan (Beginning vs End):
  # Beginning:
